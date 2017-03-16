@@ -1,6 +1,7 @@
 Hello and welcome to the CocoaNuts iOS Game Development demo! Today we will be making a simple space shooting game using SpriteKit and GameplayKit. Be advised that this is a somewhat advanced demo with lots of code.
 
 ---
+---
 
 # Part 1: Getting Started
 #### Our first task: draw a space ship on the screen and move it around with our finger! 
@@ -77,6 +78,7 @@ class GameScene: SKScene {
 ```
 
 ---
+---
 
 Now, before we can begin properly, we need to introduce the Entity-Component architecture. I highly recommend reading over [Apple's documentation](https://developer.apple.com/library/content/documentation/General/Conceptual/GameplayKit_Guide/EntityComponent.html) on Entity-Component, but I'll give a brief explanation here. Essentially the Entity-Component architecture is all about small modules ("components") that you can attach to more generalized objects ("entities"). This way, the functionality of one object in our game can be easily attached to other kinds of objects, unlike with a traditional, inheritence-based architecture. 
 
@@ -84,7 +86,7 @@ Now, before we can begin properly, we need to introduce the Entity-Component arc
 
 We will be creating several components for use in our game, using the GameplayKit framework. 
 
--
+---
 
 Start by creating a new Cocoa Touch class called SpriteComponent. When attached to an entity, this component will help manage an entity's visual representation on the screen. 
 
@@ -124,7 +126,7 @@ required init?(coder aDecoder: NSCoder) {
 
 Don't worry about it for now. 
 
--
+---
 
 Now create a new Cocoa Touch class called "PlayerControlComponent", and type in this code:
 
@@ -160,7 +162,7 @@ class PlayerControlComponent: GKComponent {
 
 Again, insert the `init?(coder aDecoder: NSCoder)` initializer as Xcode tells you to. This component will be the interface between touch input to the screen and the on-screen representation of your ship. 
 
--
+---
 
 It's finally time to work on GameScene itself. There's a lot of code here, so buckle in!
 
@@ -196,7 +198,7 @@ override func sceneDidLoad() {
 }
 ```
 
--
+---
 
 This next part is the really juicy bit. Here we create the entity representing the ship, and the components the comprise it. All put together this will give us a ship that can be controlled with player input. 
 
@@ -234,7 +236,7 @@ func setUpEntities() {
 
 If that is confusing for you, please ask for help from another CocoaNuts member! We are all very friendly.
 
--
+---
 
 There are just a few more things left before we can see our ship moving around on the screen. We need to add this code to actually update the player's position in response to touch events. 
 
@@ -262,7 +264,7 @@ func touchUp(atPoint pos : CGPoint) {
 
 This code uses methods from the template code to update the player position. (The `touchesBegan`, `touchesMoved`, `touchesEnded`, and `touchesCancelled` methods are actually what handle touch events. The `touchDown`, `touchMoved`, and `touchUp` methods are there for convenience and code legibility.)
 
--
+---
 
 The very last thing we need to do to get our ship moving around on the screen is to add this little bit of code to our update function, after the for-loop where we update the entities: 
 
@@ -275,7 +277,7 @@ for case let component as PlayerControlComponent in playerControlComponentSystem
 
 Components that are a part of component systems won't update along with their entities—they need to be updated separately. That is why we need a new loop to update our player control component systems. 
 
--
+---
 
 All put together, your GameScene class should look like this:
 
@@ -415,6 +417,7 @@ Now when you run the game (press Command-R, or press the play button in the uppe
 You can also remove the "Hello World!" label from the SpriteKit scene. Simply click on GameScene.sks in the left sidebar, click on the label in the scene and press delete. 
 
 ---
+---
 
 # Part 2: Shooting and Particles
 #### Our second task: have glowing projectiles shoot out from the ship! 
@@ -503,7 +506,7 @@ override func update(deltaTime seconds: TimeInterval) {
 
 Hooray! Let's make our GameScene compatible with this component. Remember, it's our GameScene that actually creates and manages our entities, and our projectiles are indeed entities. 
 
--
+---
 
 We'll need to make a new component system for this component, since it communicates with the scene. Add this line of code under your other component system declarations: 
 
@@ -566,7 +569,7 @@ for case let component as BlastingComponent in blastingComponentSystem.component
 
 Now you should have a space ship blasting white pellets that you can move around the screen! Next, it's time to apply particle effects to the pellets. 
 
--
+---
 
 Let's create another Cocoa Touch class, this time called ParticleComponent. Import SpriteKit and GameplayKit, then type this into the class: 
 
@@ -611,7 +614,7 @@ override func update(deltaTime seconds: TimeInterval) {
 }
 ```
 
--
+---
 
 Let's take a small break and do something more visual. It's time to create your actual particle effect! Create a new file, and instead of making a Cocoa Touch class, scroll down until you find the SpriteKit Particle File, under "Resource". You can use any starting template you want, but I use fire myself. Name it "Energy". 
 
@@ -621,7 +624,7 @@ Toy around with the values until you get something you like. If you'd like to kn
 
 I recommend leaving your emitter birthrate low, for performance reasons. Also, for the particle velocity I've used in my code, a particle lifetime of around `0.2` seems to work best. You can modify this parameter, however. 
 
--
+---
 
 Now we have to make a few small changes to GameScene to get particles to work. Thankfully, this time the changes are very minimal. We only need to create and add the particle components to the particles, which you can do by adding these two lines of code to the `makeParticle()`:
 
@@ -632,6 +635,7 @@ entity.addComponent(projectileParticleComponent)
 
 Now if you run the game you should be able to see your ship emitting energy beams! If you modify your `makeParticle()` factory method and change your projectiles' color from `SKColor.white` to `SKColor.clear`, it will look even better! You can move on the the next section if you'd like, but if you're tired you can poke around with the projectile parameters and see what looks good. 
 
+---
 ---
 
 # Part 3: Collisions and Damage
@@ -709,7 +713,7 @@ let projectileHealthComponent = HealthComponent(maxHealth: 1)
 entity.addComponent(projectileHealthComponent)
 ```
 
--
+---
 
 Okay, so now we have a health system and a way to get rid of nodes, but how do we detect collisions so we can meaningfully use our new health system? We use SpriteKit's `SKPhysicsContactDelegate` protocol! To do this, we must make our GameScene conform to the `SKPhysicsContactDelegate` protocol, which you can do by adding it to the class declaration like this: 
 
@@ -740,7 +744,7 @@ You'll have to add `self.physicsWorld.contactDelegate = self` to your `sceneDidL
 
 Now we have a way to handle collisions in the game! However, we have nothing for your ship to collide *with*. Let's add in some obstacles to the game. 
 
--
+---
 
 Adding these variables and functions to the game will allow you to make asteroids that you can shoot down. 
 
@@ -830,7 +834,7 @@ node.physicsBody?.contactTestBitMask = 0x2
 
 Now asteroids should bounce off your ship. 
 
--
+---
 
 You might be thinking: "but what happened to our health system?" If you set a breakpoint inside our collision detection method, you'll notice that it's not even being called! This is because we haven't set up our collision bitmasks yet. They're a bit complex to explain, so I would recommend looking at [Apple's Documentation](https://developer.apple.com/reference/spritekit/skphysicsbody/1519869-categorybitmask) for it. You can figure it out yourself, or just add the code below to their respective methods. 
 
@@ -860,7 +864,7 @@ node.physicsBody?.contactTestBitMask = 0x2
 
 Now ships should disappear when they take too much damage. 
 
--
+---
 
 The very last thing I've prepared is using SKActions to do explosion animations. We'll start with something simple. If you've gotten this far you can probably figure out how to use the animation editor. Open the Actions.sks file and use the + button in the lower left to make a new animation. Call it whatever you want: mine is called "Boom". Try anything you think would look like a nice booming animation! Then modify `destroySprite()` to take an SKAction as an argument and play an SKAction sequence, like such: 
 
@@ -872,6 +876,7 @@ func destroySprite(withAnimation destructAnimation: SKAction) { ...
 
 You can then initialize your SpriteComponent to take a destruct animation as an initialization parameter, and then use that in the destroySprite to make a nice looking pseudo-explosion. 
 
+---
 ---
 
 # Congrats!
