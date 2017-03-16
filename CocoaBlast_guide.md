@@ -8,7 +8,6 @@ Hello and welcome to the CocoaNuts iOS Game Development demo! Today we will be m
 
 Start a new Xcode project and use the iOS Game template. 
 
-
 Try running the template code: it's actually a pretty good start to learning your way around SpriteKit!
 
 However to start making CocoaBlast, you'll need to get rid of a lot of the template code. You can delete code until it looks something like the code **below**, but you can also just copy-paste.
