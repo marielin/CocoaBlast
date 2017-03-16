@@ -17,6 +17,12 @@
 		17C662D91E7AE519005D248B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17C662D71E7AE519005D248B /* LaunchScreen.storyboard */; };
 		17C662E41E7AE519005D248B /* CocoaBlastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C662E31E7AE519005D248B /* CocoaBlastTests.swift */; };
 		17C662EF1E7AE519005D248B /* CocoaBlastUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C662EE1E7AE519005D248B /* CocoaBlastUITests.swift */; };
+		17C662FF1E7AF682005D248B /* SpriteComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C662FE1E7AF682005D248B /* SpriteComponent.swift */; };
+		17C663021E7B0F6C005D248B /* PlayerControlComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C663011E7B0F6C005D248B /* PlayerControlComponent.swift */; };
+		17C663041E7B1B4D005D248B /* BlastingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C663031E7B1B4D005D248B /* BlastingComponent.swift */; };
+		17C663061E7B2A6A005D248B /* ParticleComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C663051E7B2A6A005D248B /* ParticleComponent.swift */; };
+		17C663081E7B2BB7005D248B /* Energy.sks in Resources */ = {isa = PBXBuildFile; fileRef = 17C663071E7B2BB7005D248B /* Energy.sks */; };
+		17C6630A1E7B2FDF005D248B /* HealthComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C663091E7B2FDF005D248B /* HealthComponent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +59,12 @@
 		17C662EA1E7AE519005D248B /* CocoaBlastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CocoaBlastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C662EE1E7AE519005D248B /* CocoaBlastUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaBlastUITests.swift; sourceTree = "<group>"; };
 		17C662F01E7AE519005D248B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17C662FE1E7AF682005D248B /* SpriteComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpriteComponent.swift; path = Components/SpriteComponent.swift; sourceTree = "<group>"; };
+		17C663011E7B0F6C005D248B /* PlayerControlComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerControlComponent.swift; sourceTree = "<group>"; };
+		17C663031E7B1B4D005D248B /* BlastingComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlastingComponent.swift; path = Components/BlastingComponent.swift; sourceTree = "<group>"; };
+		17C663051E7B2A6A005D248B /* ParticleComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticleComponent.swift; sourceTree = "<group>"; };
+		17C663071E7B2BB7005D248B /* Energy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Energy.sks; sourceTree = "<group>"; };
+		17C663091E7B2FDF005D248B /* HealthComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +117,10 @@
 			children = (
 				17C662C81E7AE519005D248B /* AppDelegate.swift */,
 				17C662CA1E7AE519005D248B /* GameScene.sks */,
+				17C663071E7B2BB7005D248B /* Energy.sks */,
 				17C662CC1E7AE519005D248B /* Actions.sks */,
 				17C662CE1E7AE519005D248B /* GameScene.swift */,
+				17C663001E7AF68D005D248B /* Components */,
 				17C662D01E7AE519005D248B /* GameViewController.swift */,
 				17C662D21E7AE519005D248B /* Main.storyboard */,
 				17C662D51E7AE519005D248B /* Assets.xcassets */,
@@ -132,6 +146,18 @@
 				17C662F01E7AE519005D248B /* Info.plist */,
 			);
 			path = CocoaBlastUITests;
+			sourceTree = "<group>";
+		};
+		17C663001E7AF68D005D248B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				17C663031E7B1B4D005D248B /* BlastingComponent.swift */,
+				17C663091E7B2FDF005D248B /* HealthComponent.swift */,
+				17C662FE1E7AF682005D248B /* SpriteComponent.swift */,
+				17C663011E7B0F6C005D248B /* PlayerControlComponent.swift */,
+				17C663051E7B2A6A005D248B /* ParticleComponent.swift */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17C662D41E7AE519005D248B /* Main.storyboard in Resources */,
+				17C663081E7B2BB7005D248B /* Energy.sks in Resources */,
 				17C662CB1E7AE519005D248B /* GameScene.sks in Resources */,
 				17C662D61E7AE519005D248B /* Assets.xcassets in Resources */,
 				17C662D91E7AE519005D248B /* LaunchScreen.storyboard in Resources */,
@@ -274,8 +301,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				17C662CF1E7AE519005D248B /* GameScene.swift in Sources */,
+				17C6630A1E7B2FDF005D248B /* HealthComponent.swift in Sources */,
 				17C662D11E7AE519005D248B /* GameViewController.swift in Sources */,
+				17C662FF1E7AF682005D248B /* SpriteComponent.swift in Sources */,
+				17C663041E7B1B4D005D248B /* BlastingComponent.swift in Sources */,
 				17C662C91E7AE519005D248B /* AppDelegate.swift in Sources */,
+				17C663061E7B2A6A005D248B /* ParticleComponent.swift in Sources */,
+				17C663021E7B0F6C005D248B /* PlayerControlComponent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
