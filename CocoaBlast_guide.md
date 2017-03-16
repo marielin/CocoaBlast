@@ -619,7 +619,7 @@ Let's take a small break and do something more visual. It's time to create your 
 
 Toy around with the values until you get something you like. If you'd like to know what my particle is, here are its settings:
 
-// TODO: Add image
+![my particle settings](https://raw.githubusercontent.com/marielin/CocoaBlast/master/particle_settings.png)
 
 I recommend leaving your emitter birthrate low, for performance reasons. Also, for the particle velocity I've used in my code, a particle lifetime of around `0.2` seems to work best. You can modify this parameter, however. 
 
