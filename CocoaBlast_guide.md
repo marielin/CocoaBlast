@@ -10,7 +10,7 @@ Start a new Xcode project and use the iOS Game template.
 
 Try running the template code: it's actually a pretty good start to learning your way around SpriteKit!
 
-However to start making CocoaBlast, you'll need to get rid of a lot of the template code. You can delete code until it looks something like the code **below**, but you can also just copy-paste.
+However to start making CocoaBlast, you'll need to get rid of a lot of the template code. You can delete code in GameScene.swift until it looks something like the code **below**, but you can also just copy-paste.
 
 ```
 import SpriteKit
@@ -510,10 +510,10 @@ Hooray! Let's make our GameScene compatible with this component. Remember, it's 
 We'll need to make a new component system for this component, since it communicates with the scene. Add this line of code under your other component system declarations: 
 
 ```
-var blastingComponentSystem = GKComponentSystem(componentClass: blastingComponent.self)
+var blastingComponentSystem = GKComponentSystem(componentClass: BlastingComponent.self)
 ```
 
-We'll also need to actually create and add this component to the ship factory method we made earlier, `makeship()`. You can do so by adding these three lines of code to that function:
+We'll also need to actually create and add this component to the ship factory method we made earlier, `makeShip()`. You can do so by adding these three lines of code to that function:
 
 ```
 	let blastingComponent = BlastingComponent()
@@ -534,7 +534,8 @@ func makeProjectile(withVelocity velocity: CGFloat, atPosition position: CGPoint
 	node.physicsBody = SKPhysicsBody(circleOfRadius: radius)
 	node.physicsBody?.affectedByGravity = false
 	node.physicsBody?.velocity = CGVector(dx: 0, dy: velocity)
-	node.physicsBody?.allowsRotation = false	self.addChild(node)
+	node.physicsBody?.allowsRotation = false	
+	self.addChild(node)
 	
 	let projectileSpriteComponent = SpriteComponent(spriteNode: node)
 	
@@ -621,18 +622,18 @@ Toy around with the values until you get something you like. If you'd like to kn
 
 ![my particle settings](https://raw.githubusercontent.com/marielin/CocoaBlast/master/particle_settings.png)
 
-I recommend leaving your emitter birthrate low, for performance reasons. Also, for the particle velocity I've used in my code, a particle lifetime of around `0.2` seems to work best. You can modify this parameter, however. 
+For performance reasons, I recommend leaving your emitter birthRate low. Also, for the particle velocity I've used in my code, a particle lifetime of around `0.2` seems to work best. You can modify this parameter, however. 
 
 ---
 
-Now we have to make a few small changes to GameScene to get particles to work. Thankfully, this time the changes are very minimal. We only need to create and add the particle components to the particles, which you can do by adding these two lines of code to the `makeParticle()`:
+Now we have to make a few small changes to GameScene to get particles to work. Thankfully, this time the changes are very minimal. We only need to create and add the particle components to the particles, which you can do by adding these two lines of code to the `makeProjectile()`:
 
 ```
 let projectileParticleComponent = ParticleComponent(particleName: "Energy", scene: self)
 entity.addComponent(projectileParticleComponent)
 ```
 
-Now if you run the game you should be able to see your ship emitting energy beams! If you modify your `makeParticle()` factory method and change your projectiles' color from `SKColor.white` to `SKColor.clear`, it will look even better! You can move on the the next section if you'd like, but if you're tired you can poke around with the projectile parameters and see what looks good. 
+Now if you run the game you should be able to see your ship emitting energy beams! If you modify your `makeProjectile()` factory method and change your projectiles' color from `SKColor.white` to `SKColor.clear`, it will look even better! You can move on the the next section if you'd like, but if you're tired you can poke around with the projectile parameters and see what looks good. 
 
 ---
 ---
